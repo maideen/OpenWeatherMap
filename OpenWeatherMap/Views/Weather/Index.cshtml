@@ -1,0 +1,82 @@
+﻿@model OpenWeatherMap.Models.WeatherModel
+
+@section metatags
+{
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+}
+
+
+<link href="~/Content/weather.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/weather-2-small.css" media="(max-width:600px)" rel="stylesheet" type="text/css" />
+<link href="~/Content/weather-2-large.css" media="(min-width:601px)" rel="stylesheet" type="text/css" />
+
+
+@{ ViewBag.Title = "OpenWeatherMap";}
+
+
+@using (Html.BeginForm("Index", "Weather", FormMethod.Get))
+{
+    <b>Search:</b>
+    @Html.TextBox("search") <input type="submit" name="submit" value="Search" />
+}
+
+
+
+<body>
+
+    <div class="weather-forecast" role="main">
+
+        @if (Model.apiResponse != null)
+        {
+            @(new HtmlString(Model.apiResponse))
+            <div id="view"></div>
+        }
+        else
+        {
+            <label>Invalid search</label>
+        }
+
+    </div>
+
+
+    <script>
+
+
+
+        @*$(function () {
+
+            navigator.geolocation.getCurrentPosition(showPosition, positionError);
+
+            function showPosition(position) {
+                var coordinates = position.coords;
+
+                $.ajax({
+
+                    url: '@Url.Action("Index", "Weather")',
+                    type: "GET",
+                    cache: false,
+                    //data: { 'latitude': coordinates.latitude, 'longitude': coordinates.latitude },
+                    data: { 'latitude': '35', 'longitude': '109' },
+                    success: function (data) {
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve data.');
+                    }
+                });
+
+            }
+
+            function positionError(position) {
+                //Geolocation is not supported by this browser
+            }
+
+        });*@
+        
+
+    </script>
+
+
+</body>
